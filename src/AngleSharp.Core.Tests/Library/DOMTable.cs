@@ -147,7 +147,7 @@
             var rows = (table as IHtmlTableElement).Rows;
             Assert.IsNotNull(rows);
 
-            CollectionAssert.AreEqual(new IHtmlTableRowElement[] {
+            Assert.That(rows.ToArray(), Is.EqualTo(new IHtmlTableRowElement[] {
                 // thead
                 head1row1,
                 head1row2,
@@ -170,7 +170,7 @@
                 foot1row2,
                 foot2row1,
                 foot2row2
-            }, rows.ToArray());
+            }).AsCollection);
 
             var ids = new[] {
                 "orphan1",
@@ -260,10 +260,10 @@
             var document = Html("");
             var table = document.CreateElement("table") as IHtmlTableElement;
             var before = table.AppendChild(document.CreateElement("tbody")) as IHtmlTableSectionElement;
-            CollectionAssert.AreEqual(new[] { before }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new[] { before }).AsCollection);
 
             var tbody = table.CreateBody();
-            CollectionAssert.AreEqual(new[] { before, tbody }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new[] { before, tbody }).AsCollection);
             AssertTableBody(tbody);
         }
 
@@ -274,10 +274,10 @@
             var table = document.CreateElement("table") as IHtmlTableElement;
             var before1 = table.AppendChild(document.CreateElement("tbody")) as IHtmlTableSectionElement;
             var before2 = table.AppendChild(document.CreateElement("tbody")) as IHtmlTableSectionElement;
-            CollectionAssert.AreEqual(new[] { before1, before2 }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new[] { before1, before2 }).AsCollection);
 
             var tbody = table.CreateBody();
-            CollectionAssert.AreEqual(new[] { before1, before2, tbody }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new[] { before1, before2, tbody }).AsCollection);
             AssertTableBody(tbody);
         }
 
@@ -288,10 +288,10 @@
             var table = document.CreateElement("table") as IHtmlTableElement;
             var before1 = table.AppendChild(document.CreateElement("thead")) as IHtmlTableSectionElement;
             var before2 = table.AppendChild(document.CreateElement("tbody")) as IHtmlTableSectionElement;
-            CollectionAssert.AreEqual(new[] { before1, before2 }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new[] { before1, before2 }).AsCollection);
 
             var tbody = table.CreateBody();
-            CollectionAssert.AreEqual(new[] { before1, before2, tbody }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new[] { before1, before2, tbody }).AsCollection);
             AssertTableBody(tbody);
         }
 
@@ -302,10 +302,10 @@
             var table = document.CreateElement("table") as IHtmlTableElement;
             var before1 = table.AppendChild(document.CreateElement("tfoot"));
             var before2 = table.AppendChild(document.CreateElement("tbody"));
-            CollectionAssert.AreEqual(new[] { before1, before2 }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new[] { before1, before2 }).AsCollection);
 
             var tbody = table.CreateBody();
-            CollectionAssert.AreEqual(new[] { before1, before2, tbody }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new[] { before1, before2, tbody }).AsCollection);
             AssertTableBody(tbody);
         }
 
@@ -316,10 +316,10 @@
             var table = document.CreateElement("table") as IHtmlTableElement;
             var before = table.AppendChild(document.CreateElement("tbody")) as IHtmlTableSectionElement;
             var after = table.AppendChild(document.CreateElement("thead")) as IHtmlTableSectionElement;
-            CollectionAssert.AreEqual(new INode[] { before, after }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before, after }).AsCollection);
 
             var tbody = table.CreateBody();
-            CollectionAssert.AreEqual(new INode[] { before, tbody, after }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before, tbody, after }).AsCollection);
             AssertTableBody(tbody);
         }
 
@@ -330,10 +330,10 @@
             var table = document.CreateElement("table") as IHtmlTableElement;
             var before = table.AppendChild(document.CreateElement("tbody")) as IHtmlTableSectionElement;
             var after = table.AppendChild(document.CreateElement("tfoot")) as IHtmlTableSectionElement;
-            CollectionAssert.AreEqual(new INode[] { before, after }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before, after }).AsCollection);
 
             var tbody = table.CreateBody();
-            CollectionAssert.AreEqual(new INode[] { before, tbody, after }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before, tbody, after }).AsCollection);
             AssertTableBody(tbody);
         }
 
@@ -345,10 +345,10 @@
             var before1 = table.AppendChild(document.CreateElement("tbody")) as IHtmlTableSectionElement;
             var before2 = table.AppendChild(document.CreateElement("tbody")) as IHtmlTableSectionElement;
             var after = table.AppendChild(document.CreateElement("div"));
-            CollectionAssert.AreEqual(new INode[] { before1, before2, after }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before1, before2, after }).AsCollection);
 
             var tbody = table.CreateBody();
-            CollectionAssert.AreEqual(new INode[] { before1, before2, tbody, after }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before1, before2, tbody, after }).AsCollection);
             AssertTableBody(tbody);
         }
 
@@ -359,10 +359,10 @@
             var table = document.CreateElement("table") as IHtmlTableElement;
             var before = table.AppendChild(document.CreateElement("tbody"));
             var after = table.AppendChild(document.CreateElement("x", "tbody"));
-            CollectionAssert.AreEqual(new[] { before, after }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new[] { before, after }).AsCollection);
 
             var tbody = table.CreateBody();
-            CollectionAssert.AreEqual(new[] { before, tbody, after }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new[] { before, tbody, after }).AsCollection);
             AssertTableBody(tbody);
         }
 
@@ -373,10 +373,10 @@
             var table = document.CreateElement("table") as IHtmlTableElement;
             var before = table.AppendChild(document.CreateElement("tbody"));
             before.AppendChild(document.CreateElement("tbody"));
-            CollectionAssert.AreEqual(new INode[] { before }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before }).AsCollection);
 
             var tbody = table.CreateBody();
-            CollectionAssert.AreEqual(new INode[] { before, tbody }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before, tbody }).AsCollection);
             AssertTableBody(tbody);
         }
 
@@ -387,10 +387,10 @@
             var table = document.CreateElement("table") as IHtmlTableElement;
             var before = table.AppendChild(document.CreateElement("thead"));
             before.AppendChild(document.CreateElement("tbody"));
-            CollectionAssert.AreEqual(new INode[] { before }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before }).AsCollection);
 
             var tbody = table.CreateBody();
-            CollectionAssert.AreEqual(new INode[] { before, tbody }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before, tbody }).AsCollection);
             AssertTableBody(tbody);
         }
 
@@ -401,10 +401,10 @@
             var table = document.CreateElement("table") as IHtmlTableElement;
             var before = table.AppendChild(document.CreateElement("tfoot"));
             before.AppendChild(document.CreateElement("tbody"));
-            CollectionAssert.AreEqual(new INode[] { before }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before }).AsCollection);
 
             var tbody = table.CreateBody();
-            CollectionAssert.AreEqual(new INode[] { before, tbody }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before, tbody }).AsCollection);
             AssertTableBody(tbody);
         }
 
@@ -416,10 +416,10 @@
             var before = table.AppendChild(document.CreateElement("tbody"));
             var after = table.AppendChild(document.CreateElement("thead"));
             after.AppendChild(document.CreateElement("tbody"));
-            CollectionAssert.AreEqual(new INode[] { before, after }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before, after }).AsCollection);
 
             var tbody = table.CreateBody();
-            CollectionAssert.AreEqual(new INode[] { before, tbody, after }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before, tbody, after }).AsCollection);
             AssertTableBody(tbody);
         }
 
@@ -431,10 +431,10 @@
             var before = table.AppendChild(document.CreateElement("tbody"));
             var after = table.AppendChild(document.CreateElement("tfoot"));
             after.AppendChild(document.CreateElement("tbody"));
-            CollectionAssert.AreEqual(new INode[] { before, after }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before, after }).AsCollection);
 
             var tbody = table.CreateBody();
-            CollectionAssert.AreEqual(new INode[] { before, tbody, after }, table.ChildNodes.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { before, tbody, after }).AsCollection);
             AssertTableBody(tbody);
         }
 
@@ -457,9 +457,9 @@
             Assert.IsNull(body.Prefix);
             Assert.AreEqual("tbody", body.LocalName);
             Assert.AreEqual("TBODY", body.TagName);
-            CollectionAssert.AreEqual(new INode[] { body }, parentEl.ChildNodes.ToArray());
-            CollectionAssert.AreEqual(new INode[] { row }, body.ChildNodes.ToArray());
-            CollectionAssert.AreEqual(new IHtmlTableRowElement[] { row }, parentEl.Rows.ToArray());
+            Assert.That(parentEl.ChildNodes.ToArray(), Is.EqualTo(new INode[] { body }).AsCollection);
+            Assert.That(body.ChildNodes.ToArray(), Is.EqualTo(new INode[] { row }).AsCollection);
+            Assert.That(parentEl.Rows.ToArray(), Is.EqualTo(new IHtmlTableRowElement[] { row }).AsCollection);
         }
 
         [Test]
@@ -468,13 +468,13 @@
             var document = Html("");
             var table = document.CreateElement("table") as IHtmlTableElement;
             var head = table.AppendChild(document.CreateElement("thead"));
-            CollectionAssert.AreEqual(Array.Empty<INode>(), table.Rows.ToArray());
+            Assert.That(table.Rows.ToArray(), Is.EqualTo(Array.Empty<INode>()).AsCollection);
             var row = table.InsertRowAt(-1);
             var body = row.Parent;
-            CollectionAssert.AreEqual(new INode[] { head, body }, table.ChildNodes.ToArray());
-            CollectionAssert.AreEqual(Array.Empty<INode>(), head.ChildNodes.ToArray());
-            CollectionAssert.AreEqual(new INode[] { row }, body.ChildNodes.ToArray());
-            CollectionAssert.AreEqual(new INode[] { row }, table.Rows.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { head, body }).AsCollection);
+            Assert.That(head.ChildNodes.ToArray(), Is.EqualTo(Array.Empty<INode>()).AsCollection);
+            Assert.That(body.ChildNodes.ToArray(), Is.EqualTo(new INode[] { row }).AsCollection);
+            Assert.That(table.Rows.ToArray(), Is.EqualTo(new INode[] { row }).AsCollection);
         }
 
         [Test]
@@ -483,13 +483,13 @@
             var document = Html("");
             var table = document.CreateElement("table") as IHtmlTableElement;
             var foot = table.AppendChild(document.CreateElement("tfoot"));
-            CollectionAssert.AreEqual(Array.Empty<INode>(), table.Rows.ToArray());
+            Assert.That(table.Rows.ToArray(), Is.EqualTo(Array.Empty<INode>()).AsCollection);
             var row = table.InsertRowAt(-1);
             var body = row.Parent;
-            CollectionAssert.AreEqual(new INode[] { foot, body }, table.ChildNodes.ToArray());
-            CollectionAssert.AreEqual(Array.Empty<INode>(), foot.ChildNodes.ToArray());
-            CollectionAssert.AreEqual(new INode[] { row }, body.ChildNodes.ToArray());
-            CollectionAssert.AreEqual(new INode[] { row }, table.Rows.ToArray());
+            Assert.That(table.ChildNodes.ToArray(), Is.EqualTo(new INode[] { foot, body }).AsCollection);
+            Assert.That(foot.ChildNodes.ToArray(), Is.EqualTo(Array.Empty<INode>()).AsCollection);
+            Assert.That(body.ChildNodes.ToArray(), Is.EqualTo(new INode[] { row }).AsCollection);
+            Assert.That(table.Rows.ToArray(), Is.EqualTo(new INode[] { row }).AsCollection);
         }
 
         [Test]
@@ -936,8 +936,8 @@
             row.InsertCellAt(tableCellKind: TableCellKind.Td);
             row.InsertCellAt(tableCellKind: TableCellKind.Th);
 
-            StringAssert.AreEqualIgnoringCase(TagNames.Td, row.Children[0].TagName);
-            StringAssert.AreEqualIgnoringCase(TagNames.Th, row.Children[1].TagName);
+            Assert.That(row.Children[0].TagName, Is.EqualTo(TagNames.Td).IgnoreCase);
+            Assert.That(row.Children[1].TagName, Is.EqualTo(TagNames.Th).IgnoreCase);
         }
 
         private static IHtmlTableRowElement MakeRowElement(params String[] names)
@@ -974,7 +974,7 @@
             bar2.Id = "bar";
             var rows = (table as IHtmlTableElement).Rows;
             Assert.IsNotNull(rows);
-            CollectionAssert.AreEquivalent(new[] { foo1, bar1, foo2, bar2 }, rows);
+            Assert.That(rows, Is.EquivalentTo(new[] { foo1, bar1, foo2, bar2 }));
             Assert.AreEqual(foo1, rows["foo"]);
             Assert.AreEqual(bar1, rows["bar"]);
         }

@@ -67,8 +67,8 @@ namespace AngleSharp.Core.Tests.Examples
             //Or directly with CSS selectors
             var blueListItemsCssSelector = document.QuerySelectorAll("li.blue");
 
-            CollectionAssert.AreEqual(new String [] { "Third item!", "Last item!" }, blueListItemsLinq.Select(item => item.Text()));
-            CollectionAssert.AreEqual(new String [] { "Third item!", "Last item!" }, blueListItemsCssSelector.Select(item => item.Text()));
+            Assert.That(blueListItemsLinq.Select(item => item.Text()), Is.EqualTo(new String[] { "Third item!", "Last item!" }).AsCollection);
+            Assert.That(blueListItemsCssSelector.Select(item => item.Text()), Is.EqualTo(new String[] { "Third item!", "Last item!" }).AsCollection);
         }
 
         [Test]

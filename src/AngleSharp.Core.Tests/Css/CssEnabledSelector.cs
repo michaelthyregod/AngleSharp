@@ -69,10 +69,10 @@ namespace AngleSharp.Core.Tests.Css
                 "<div id='other'></div></body>").ToHtmlDocument();
 
             Assert.AreEqual("button", document.QuerySelector(":enabled").Id);
-            CollectionAssert.AreEqual(new[] { "button", "input" },
-                document.QuerySelectorAll(":enabled").Select(element => element.Id));
-            CollectionAssert.AreEqual(new[] { "disabledButton", "disabledInput" },
-                document.QuerySelectorAll(":disabled").Select(element => element.Id));
+            Assert.That(document.QuerySelectorAll(":enabled").Select(element => element.Id),
+                Is.EqualTo(new[] { "button", "input" }).AsCollection);
+            Assert.That(document.QuerySelectorAll(":disabled").Select(element => element.Id),
+                Is.EqualTo(new[] { "disabledButton", "disabledInput" }).AsCollection);
         }
     }
 }

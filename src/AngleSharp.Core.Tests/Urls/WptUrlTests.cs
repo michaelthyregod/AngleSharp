@@ -69,7 +69,7 @@ namespace AngleSharp.Core.Tests.Urls
 
             var passing = entries.Count - failures.Count;
             var percentage = entries.Count == 0 ? 0.0 : 100.0 * passing / entries.Count;
-            TestContext.WriteLine($"WPT url tests: {passing} of {entries.Count} pass ({percentage:F1}%), {failures.Count} fail, baseline is {MinimumPassing}.");
+            TestContext.Out.WriteLine($"WPT url tests: {passing} of {entries.Count} pass ({percentage:F1}%), {failures.Count} fail, baseline is {MinimumPassing}.");
 
             if (passing < MinimumPassing)
             {

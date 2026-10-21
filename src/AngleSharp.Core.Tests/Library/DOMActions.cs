@@ -166,7 +166,7 @@ namespace AngleSharp.Core.Tests.Library
             Assert.AreEqual(2, form.Elements.Length);
             Assert.AreEqual(two, form.Elements["2"]);
             Assert.AreEqual(othree, form.Elements["03"]);
-            CollectionAssert.AreEqual(new IHtmlElement[] { two, othree }, form.Elements.ToArray());
+            Assert.That(form.Elements.ToArray(), Is.EqualTo(new IHtmlElement[] { two, othree }).AsCollection);
             form.RemoveChild(two);
             form.RemoveChild(othree);
         }
@@ -713,13 +713,13 @@ namespace AngleSharp.Core.Tests.Library
             }
 
             select.RemoveOptionAt(-1);
-            CollectionAssert.AreEqual(options, select.Options);
+            Assert.That(select.Options, Is.EqualTo(options).AsCollection);
 
             select.RemoveOptionAt(3);
-            CollectionAssert.AreEqual(options, select.Options);
+            Assert.That(select.Options, Is.EqualTo(options).AsCollection);
 
             select.RemoveOptionAt(0);
-            CollectionAssert.AreEqual(new[] { options[1], options[2] }, select.Options);
+            Assert.That(select.Options, Is.EqualTo(new[] { options[1], options[2] }).AsCollection);
         }
 
         [Test]
@@ -740,13 +740,13 @@ namespace AngleSharp.Core.Tests.Library
             }
 
             select.Options.Remove(-1);
-            CollectionAssert.AreEqual(options, select.Options);
+            Assert.That(select.Options, Is.EqualTo(options).AsCollection);
 
             select.Options.Remove(3);
-            CollectionAssert.AreEqual(options, select.Options);
+            Assert.That(select.Options, Is.EqualTo(options).AsCollection);
 
             select.Options.Remove(0);
-            CollectionAssert.AreEqual(new[] { options[1], options[2] }, select.Options);
+            Assert.That(select.Options, Is.EqualTo(new[] { options[1], options[2] }).AsCollection);
         }
 
         [Test]
@@ -907,8 +907,8 @@ namespace AngleSharp.Core.Tests.Library
             var children_outer = fs_outer.Elements;
             var fs_inner = document.GetElementById("fs_inner") as IHtmlFieldSetElement;
             var children_inner = fs_inner.Elements;
-            CollectionAssert.AreEqual(new[] { fm1["txt_inner"] as IHtmlElement }, children_inner.ToArray());
-            CollectionAssert.AreEqual(new[] { fm1["cb"], fm1["txt"], fm1["btn"], fm1["fs_inner"], fm1["txt_inner"] }.OfType<IHtmlElement>().ToArray(), children_outer.ToArray());
+            Assert.That(children_inner.ToArray(), Is.EqualTo(new[] { fm1["txt_inner"] as IHtmlElement }).AsCollection);
+            Assert.That(children_outer.ToArray(), Is.EqualTo(new[] { fm1["cb"], fm1["txt"], fm1["btn"], fm1["fs_inner"], fm1["txt_inner"] }.OfType<IHtmlElement>().ToArray()).AsCollection);
         }
 
         [Test]

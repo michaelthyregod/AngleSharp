@@ -35,7 +35,7 @@ namespace AngleSharp.Core.Tests.Library
             var document = await LoadAsync("<a id=a href='/next'>x</a>", config);
             var link = (IHtmlElement)document.GetElementById("a");
 
-            var ex = Assert.ThrowsAsync<InvalidOperationException>(() => link.DoClickAsync());
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => link.DoClickAsync());
 
             Assert.AreEqual("navigation failed", ex.Message);
         }

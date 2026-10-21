@@ -77,7 +77,7 @@ namespace AngleSharp.Core.Tests.Css
 
             foreach (var selector in new[] { ":any-link", ":link", ":link, :visited" })
             {
-                CollectionAssert.AreEqual(expected, document.QuerySelectorAll(selector).Select(element => element.Id));
+                Assert.That(document.QuerySelectorAll(selector).Select(element => element.Id), Is.EqualTo(expected).AsCollection);
                 Assert.AreEqual("a-empty", document.QuerySelector(selector).Id);
             }
 

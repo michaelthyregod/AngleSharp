@@ -224,7 +224,7 @@ namespace AngleSharp.Core.Tests.Library
                 var document = await context.OpenAsync(url);
                 var cookies = document.Cookie.Split(';').Select(m => m.Trim());
 
-                CollectionAssert.AreEquivalent(new[] {"k1=v1", "k2=v2"}, cookies);
+                Assert.That(cookies, Is.EquivalentTo(new[] { "k1=v1", "k2=v2" }));
             }
         }
 
@@ -239,7 +239,7 @@ namespace AngleSharp.Core.Tests.Library
                 var document = await context.OpenAsync(url);
                 var cookies = document.Cookie.Split(';').Select(m => m.Trim());
 
-                CollectionAssert.AreEquivalent(new[] {"k1=v1", "k2=v2", "foo=bar", "test=baz"}, cookies);
+                Assert.That(cookies, Is.EquivalentTo(new[] { "k1=v1", "k2=v2", "foo=bar", "test=baz" }));
             }
         }
 

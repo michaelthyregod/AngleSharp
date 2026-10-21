@@ -29,6 +29,12 @@ namespace AngleSharp.Core.Tests.Library
             document = source.ToHtmlDocument();
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            document?.Dispose();
+        }
+
         [Test]
         public void WindowUnloadingHandlerUsesBeforeUnloadEventName()
         {
@@ -144,8 +150,8 @@ namespace AngleSharp.Core.Tests.Library
             var task = document.AwaitEventAsync(evName);
             Assert.IsFalse(task.IsCompleted);
             document.Dispatch(ev);
-            // Completed by the dispatch itself, whatever synchronization context is current -
-            // only continuations of the task are posted elsewhere.
+            // Completed by the dispatch itself, even with the synchronization context NUnit
+            // installs per test - only continuations of the task are posted elsewhere.
             Assert.IsTrue(task.IsCompleted);
             Assert.IsFalse(task.IsFaulted);
             Assert.AreEqual(evName, task.Result.Type);
@@ -164,7 +170,7 @@ namespace AngleSharp.Core.Tests.Library
         }
 
         [Test]
-        public void EventsAwaitedCancelledRemovesListener()
+        public async Task EventsAwaitedCancelledRemovesListener()
         {
             var target = (EventTarget)document;
             using var cts = new CancellationTokenSource();
@@ -173,7 +179,7 @@ namespace AngleSharp.Core.Tests.Library
             cts.Cancel();
             Assert.IsTrue(task.IsCanceled);
             Assert.IsFalse(target.HasEventListener("click"));
-            Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+            await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
         }
 
         [Test]

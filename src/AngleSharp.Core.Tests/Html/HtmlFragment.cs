@@ -520,7 +520,7 @@
             Assert.IsNotNull(el);
             Assert.AreEqual(3, el.ClassList.Length);
 
-            CollectionAssert.AreEqual(new List<String>(new [] { "class1", "CLASS2", "claSS3" }), new List<String>(el.ClassList));
+            Assert.That(new List<String>(el.ClassList), Is.EqualTo(new List<String>(new[] { "class1", "CLASS2", "claSS3" })).AsCollection);
 
             Assert.AreEqual(0, dom.QuerySelectorAll(".class2").Length);
             Assert.AreEqual(1, dom.QuerySelectorAll(".CLASS2").Length);
@@ -535,7 +535,7 @@
             Assert.IsNotNull(el);
             Assert.AreEqual(2, el.ClassList.Length);
 
-            CollectionAssert.AreEqual(new List<String>(new[] { "class", "CLASS" }), new List<String>(el.ClassList));
+            Assert.That(new List<String>(el.ClassList), Is.EqualTo(new List<String>(new[] { "class", "CLASS" })).AsCollection);
         }
 
         [Test]

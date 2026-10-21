@@ -33,7 +33,7 @@ namespace AngleSharp.Core.Tests.Vulnerabilities
             Assert.AreEqual(1, errors.Count);
             var error = (DomException)errors[0];
             Assert.AreEqual((Int32)DomError.Security, error.Code);
-            StringAssert.Contains("Blocked form submission", error.Message);
+            Assert.That(error.Message, Does.Contain("Blocked form submission"));
         }
 
         [TestCase(false)]
@@ -57,7 +57,7 @@ namespace AngleSharp.Core.Tests.Vulnerabilities
             foreach (var error in errors)
             {
                 Assert.AreEqual((Int32)DomError.Security, ((DomException)error).Code);
-                StringAssert.Contains("Blocked form submission", error.Message);
+                Assert.That(error.Message, Does.Contain("Blocked form submission"));
             }
         }
     }

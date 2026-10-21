@@ -19,6 +19,12 @@
             document = Assets.quirksmode.ToHtmlDocument();
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            document?.Dispose();
+        }
+
         [Test]
         public void CreateElementInUppercase()
         {

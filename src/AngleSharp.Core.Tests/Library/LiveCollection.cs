@@ -210,12 +210,12 @@
             var elements = form.Elements;
 
             Assert.AreEqual(3, elements.Length);
-            CollectionAssert.AreEqual(new[]
+            Assert.That(elements.ToArray(), Is.EqualTo(new[]
             {
                 document.GetElementById("before"),
                 document.GetElementById("inside"),
                 document.GetElementById("after")
-            }, elements.ToArray());
+            }).AsCollection);
         }
 
         [Test]
@@ -225,8 +225,8 @@
             var first = document.GetElementById("first") as IHtmlFormElement;
             var second = document.GetElementById("second") as IHtmlFormElement;
 
-            CollectionAssert.AreEqual(new[] { document.GetElementById("a") }, first.Elements.ToArray());
-            CollectionAssert.AreEqual(new[] { document.GetElementById("b") }, second.Elements.ToArray());
+            Assert.That(first.Elements.ToArray(), Is.EqualTo(new[] { document.GetElementById("a") }).AsCollection);
+            Assert.That(second.Elements.ToArray(), Is.EqualTo(new[] { document.GetElementById("b") }).AsCollection);
         }
 
         [Test]
@@ -311,12 +311,12 @@
 
             Assert.AreEqual(2, elements.Length);
             Assert.AreSame(added, elements[0]);
-            CollectionAssert.AreEqual(new[] { added, document.GetElementById("a") }, elements.ToArray());
+            Assert.That(elements.ToArray(), Is.EqualTo(new[] { added, document.GetElementById("a") }).AsCollection);
 
             added.Remove();
 
             Assert.AreEqual(1, elements.Length);
-            CollectionAssert.AreEqual(new[] { document.GetElementById("a") }, elements.ToArray());
+            Assert.That(elements.ToArray(), Is.EqualTo(new[] { document.GetElementById("a") }).AsCollection);
         }
 
         [Test]
@@ -330,11 +330,11 @@
 
             Assert.IsNull(fieldSet.Form);
             Assert.AreEqual(2, fieldSet.Elements.Length);
-            CollectionAssert.AreEqual(new[]
+            Assert.That(fieldSet.Elements.ToArray(), Is.EqualTo(new[]
             {
                 document.GetElementById("a"),
                 document.GetElementById("b")
-            }, fieldSet.Elements.ToArray());
+            }).AsCollection);
         }
     }
 }

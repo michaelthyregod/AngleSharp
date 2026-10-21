@@ -75,7 +75,7 @@ namespace AngleSharp.Core.Tests.Library
         }
 
         [Test]
-        public void CancellationDoesNotPoisonStreamAndDisposalDoesNotDisposeDocument()
+        public async Task CancellationDoesNotPoisonStreamAndDisposalDoesNotDisposeDocument()
         {
             using var document = new HtmlParser().ParseDocument("<p>still readable</p>");
             using var stream = document.ToHtmlStream();
@@ -83,7 +83,7 @@ namespace AngleSharp.Core.Tests.Library
             cancellation.Cancel();
             // A single-byte read is enough to verify cancellation before consumption.
 #pragma warning disable CA2022
-            Assert.ThrowsAsync<TaskCanceledException>(async () => await stream.ReadAsync(new Byte[1], 0, 1, cancellation.Token));
+            await Assert.ThrowsAsync<TaskCanceledException>(async () => await stream.ReadAsync(new Byte[1], 0, 1, cancellation.Token));
 #pragma warning restore CA2022
             Assert.Greater(stream.Read(new Byte[1], 0, 1), 0);
             stream.Dispose();

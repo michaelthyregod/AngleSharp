@@ -14,6 +14,7 @@
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="GitHubActionsTestLogger" PrivateAssets="all" />
     <PackageReference Include="NUnit" />
+    <PackageReference Include="NUnit.Analyzers" PrivateAssets="all" />
     <PackageReference Include="NUnit3TestAdapter" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <!-- See AngleSharp.Core.csproj: the IsTargetFrameworkCompatible intrinsic breaks in-process evaluation. -->
